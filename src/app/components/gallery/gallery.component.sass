@@ -1,8 +1,12 @@
 nav
+    position: sticky
     display: flex
+    top: 0px
+    left: 0px
     justify-content: space-between
     align-items: center
-    border-bottom: 1px solid #dadce0
+    background-color: #ffffff
+    border-bottom: 2px solid #dadce0
     padding: 20px
 
     .heading
@@ -16,6 +20,7 @@ nav
         font-family: 'Poppins', sans-serif
         padding: 0px 16px
         font-weight: 500
+        cursor: pointer
 
 .theme
     margin: 40px
@@ -40,5 +45,71 @@ nav
 
     img
         width: 300px
-        // border-radius: 8px
         margin: 40px
+
+.upload-popup
+    position: fixed
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 400px
+    padding: 20px
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    background-color: #fffffffe
+    border-radius: 20px
+    box-shadow: 4px 4px 50px 8px rgba(199,199,199,0.52)
+
+    p.heading
+        color: #5f6368
+        font-family: 'Poppins', sans-serif
+        font-weight: 500
+
+    .upload-area
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 200px
+        height: 200px
+        flex-direction: column
+        border-radius: 20px
+        border: 2px dashed #b1b1b1
+        cursor: pointer
+
+        p
+            font-family: 'Poppins', sans-serif
+            text-align: center
+
+        .icon
+            color: #eeede8
+
+    .btn
+        font-family: 'Poppins', sans-serif
+        color: #ffffff
+        background-color: #5f6368
+        padding: 8px 20px
+        margin: 20px
+        border-radius: 8px
+        cursor: pointer
+    .cancel
+        background-color: #eeede8
+        color: #5f6368
+
+    input[type=file]
+        width: 0px
+        height: 0px
+
+    input[type=text]
+        font-family: 'Poppins', sans-serif
+        margin: 20px
+        height: 30px
+        text-align: center
+        border-radius: 10px
+        background-color: #eeede8
+        color: #777777
+
+    .done
+        width: 100%
+        display: flex
+        justify-content: space-around
