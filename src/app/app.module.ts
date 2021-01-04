@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { LoginComponent } from './login/login.component';
-import { RootComponent } from './root/root.component';
+import { LoginComponent } from './components/login/login.component';
+import { RootComponent } from './components/root/root.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 const route = [{
   path: "",
@@ -28,7 +29,7 @@ const route = [{
     RouterModule.forRoot(route),
     BrowserModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [RootComponent]
 })
 export class AppModule { 
