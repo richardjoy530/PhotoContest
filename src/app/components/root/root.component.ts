@@ -6,10 +6,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.sass']
 })
-export class RootComponent implements OnInit {
-
+export class RootComponent {
   constructor() { }
-
-  ngOnInit(): void {
-  }
 }
