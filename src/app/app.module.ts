@@ -10,6 +10,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { route } from './Routes'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -21,8 +23,10 @@ import { environment } from 'src/environments/environment';
   imports: [
     RouterModule.forRoot(route),
     BrowserModule,
+    CommonModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   providers: [AuthService],
   bootstrap: [RootComponent]

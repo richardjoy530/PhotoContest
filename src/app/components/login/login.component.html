@@ -1,11 +1,12 @@
 <div class="main-container">
   <section class="login-section">
     <p>Please enter your credentials</p>
-    <form method="dialog" (submit)="login($event)">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input class="submit" type="submit" value="Log In">
-    </form>
+    <div class="field" >
+      <input id="email" type="text" placeholder="Email" [(ngModel)]='email'>
+      <input id="password" type="password" placeholder="Password" [(ngModel)]='password'>
+    </div>
+    <input (click)="loginWithEmail()" class="submit" type="button" value="Log In">
+    <input (click)="loginWithGoogle()" class="submit" type="button" value="Log In with Google">
   </section>
   <section class="other-section">
     <img src="assets\undraw_moments_0y20.svg" height="300px">

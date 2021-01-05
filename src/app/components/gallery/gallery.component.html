@@ -3,8 +3,10 @@
         Showcase
     </span>
     <span>
-        <a (click)="popUpVisible=true">Upload</a>
+        <a (click)="onUpload()">Upload</a>
         <a (click)="logout()">Logout</a>
+        <a>{{authService.currentUser?.displayName}}</a>
+        <img src={{authService.currentUser?.photoURL}} alt="">
     </span>
 </nav>
 
@@ -13,34 +15,24 @@
     <p>6th Jan 2021</p>
 </div>
 
-<div class="main-container">
+<div class="main-container" *ngFor="let entry of photoEntries | async">
     <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/p640x640/100814753_691061271690269_4745868510755255102_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=87nUWH2yzwAAX_qEwkS&tp=1&oh=c9f78d414b3b13b6a8893b9e6462bf04&oe=601DCAAC">
-    <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/p750x750/97324218_1294992927372579_2935317357916035916_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=hUPej2J2HLQAX-GZrGM&tp=1&oh=dce02d9e32a67d2520d017bf5768ae10&oe=601D97AB">
-    <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/p640x640/95774177_152734732932940_8081543456893710452_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=Y3l4__nTam8AX9tcYx3&tp=1&oh=0ec25102f7353a5c9e6fb4ce3d55fdb6&oe=601BFB60">
-    <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/p640x640/93881705_889767491503848_8572363679318778039_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=wWdeaSfAjIEAX9cK2PC&tp=1&oh=5b0ea31164fa29f7be66180d89a9ce85&oe=601C1ECA">
-    <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/p640x640/104231707_299750897733201_9174900150315678321_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=RT335OXdgXIAX_n0MNw&tp=1&oh=93ea0b567ee24fbf43468af3e6807636&oe=601BC766">
-    <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/p750x750/120598059_333175684444182_34518165648300254_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=UJQHl8BwHt4AX-sK7C8&tp=1&oh=60e816b528925df5ace65baa3a792001&oe=601CA942">
-    <img
-        src="https://instagram.fcok6-1.fna.fbcdn.net/v/t51.2885-15/e35/p1080x1080/124678631_1582246841955046_8724093528513552670_n.jpg?_nc_ht=instagram.fcok6-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=HP9N2CxZesAAX8QM2eG&tp=1&oh=abdb41b53a2f97574dfd3aa8a7459554&oe=601DA843">
-</div>
+        src={{entry.photoUrl}}>
+    </div>
 
 <div *ngIf='popUpVisible' class="upload-popup">
     <p class="heading">Upload your photo</p>
-    <input class="input-file" type="file" (change)="saveFile($event)">
-    <input type="text" name="caption" placeholder="Caption" required>
-    <div (click)="chooseFile()" class="upload-area">
-        <i class="fas fa-camera fa-3x icon"></i>
-        <p>Choose a file to<br>upload</p>
+    <input class="input-file" type="file" (change)="onFileSelected($event)">
+    <input [(ngModel)]='caption' type="text" name="caption" placeholder="Caption" required>
+    <div *ngIf="!uploading" (click)="chooseFile()" class="upload-area">
+        <p *ngIf="!imgSelected">Choose a file to<br>upload</p>
+        <img id="preview" src="#" class="nano">
+    </div>
+    <div *ngIf="uploading" (click)="chooseFile()" class="upload-area">
+        <p>{{ uploadPercent | async }}%<br>uploaded</p>
     </div>
     <span class="done">
-        <button (click)="upload()" class="btn">Upload</button>
+        <button (click)="uploadToFireStorage()" class="btn">Upload</button>
         <button (click)="popUpVisible=false" class="btn cancel">Cancel</button>
     </span>
 </div>
-

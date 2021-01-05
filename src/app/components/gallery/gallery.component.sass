@@ -1,3 +1,6 @@
+.nano
+    height: 0px
+    width: 0px
 nav
     position: sticky
     display: flex
@@ -15,12 +18,22 @@ nav
         font-size: 22px
         padding: 0px 16px
         font-weight: 500
-    a
-        color: #5f6368
-        font-family: 'Poppins', sans-serif
-        padding: 0px 16px
-        font-weight: 500
-        cursor: pointer
+    
+    span
+        display: flex
+        align-items: center
+
+        a
+            color: #5f6368
+            font-family: 'Poppins', sans-serif
+            padding: 0px 16px
+            font-weight: 500
+            cursor: pointer
+        
+        img
+            width: 40px
+            border-radius: 50%
+
 
 .theme
     margin: 40px
@@ -81,8 +94,10 @@ nav
             font-family: 'Poppins', sans-serif
             text-align: center
 
-        .icon
-            color: #eeede8
+        img
+            max-width: 200px
+            max-height: 200px
+            border-radius: 10px
 
     .btn
         font-family: 'Poppins', sans-serif
