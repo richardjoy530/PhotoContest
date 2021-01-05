@@ -8,8 +8,8 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { route } from './Routes'
-import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { AngularFireModule } from '@angular/fire';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ],
-  providers: [AuthService  ],
+  providers: [AuthService],
   bootstrap: [RootComponent]
 })
 export class AppModule { }
