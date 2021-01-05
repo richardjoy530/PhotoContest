@@ -32,7 +32,7 @@
 
 <div *ngIf='popUpVisible' class="upload-popup">
     <p class="heading">Upload your photo</p>
-    <input class="input-file" type="file" name="myfile" />
+    <input class="input-file" type="file" (change)="saveFile($event)">
     <input type="text" name="caption" placeholder="Caption" required>
     <div (click)="chooseFile()" class="upload-area">
         <i class="fas fa-camera fa-3x icon"></i>
