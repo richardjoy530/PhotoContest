@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { PhotoEntry } from 'src/app/model/PhotoEntity';
+import { PhotoEntry } from 'src/app/model/PhotoEntry';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -53,6 +52,7 @@ export class GalleryComponent {
   }
 
   uploadToFireStorage() {
+    if(!this.caption) this.caption = ""
     this.uploading = true
     var filePath = `/entries/${new Date().getTime()}`
     const task = this.storage.upload(filePath, this.file)
