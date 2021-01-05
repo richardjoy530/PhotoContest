@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
-import { User } from '../model/User';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  usersList: any[];
-  currentUser: User | undefined
 
-  constructor() {
-    this.usersList = [
-      new User("Richard", "richard123"),
-      new User("Admin", "admin123"),
-    ]
+  currentUser: firebase.User | undefined
+  
+  constructor(public auth: AngularFireAuth, private route: Router) {
+    this.auth.user.subscribe((user: any) => this.currentUser = user)
+    this.auth.authState.subscribe((user: any) => {
+      if (user) route.navigate(["gallery"])
+      else route.navigate(["login"])
+    })
   }
 
-  authenticate(username: string, password: any) {
-    var success = false
-    this.usersList.forEach(user => {
-      if (user.username.toLowerCase() == username && user.password == password) {
-        this.currentUser = user
-        success = true
-      }
-    });
-    return success ? true : false
+  loginWithGoogle() {
+    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
   }
+
+  loginWithEmail(email: string, password: string) {
+    this.auth.signInWithEmailAndPassword(email, password)
+  }
+
+  logout() {
+    this.auth.signOut();
+  }
+
+
 }
 
 
