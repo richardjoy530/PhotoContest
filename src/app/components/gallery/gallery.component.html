@@ -15,8 +15,8 @@
     <p>6th Jan 2021</p>
 </div>
 
-<div class="main-container" *ngFor="let entry of photoEntries | async">
-    <img
+<div class="main-container" >
+    <img *ngFor="let entry of photoEntries | async"
         src={{entry.photoUrl}}>
     </div>
 
