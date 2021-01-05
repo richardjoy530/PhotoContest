@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "photocontest-7d8c2"
+  },
+  "targets": {
+    "photocontest-7d8c2": {
+      "hosting": {
+        "PhotoContest": [
+          "photocontest-7d8c2"
+        ]
+      }
+    }
   }
 }

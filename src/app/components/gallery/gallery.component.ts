@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,17 +9,25 @@ import { Router } from '@angular/router';
 })
 export class GalleryComponent {
   popUpVisible = false
-  constructor(private route: Router) {
+  file: any
+  constructor(private route: Router, private storage: AngularFireStorage) {
     document.body.classList.remove("bg")
   }
   chooseFile() {
     document.querySelector(".input-file")?.dispatchEvent(new MouseEvent("click"))
   }
 
-  upload() {
+  saveFile(event: any) {
+    this.file = event.target.files[0];
   }
 
-  logout(){
+  upload() {
+    var filePath = `/entries/${new Date().getTime()}`;
+    const task = this.storage.upload(filePath, this.file);
+    this.popUpVisible = false
+  }
+
+  logout() {
     this.route.navigate(["login"])
   }
 }
