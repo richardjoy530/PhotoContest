@@ -84,6 +84,10 @@ export class GalleryComponent {
     this.photoEntryConnection.add(entry)
   }
 
+  onLike(){
+    // this.photoEntryConnection.doc.apply()
+  }
+
   logout() {
     this.authService.logout()
   }
