@@ -79,7 +79,8 @@ export class GalleryComponent {
               score: 0,
               timeUploaded: Date.now(),
               uid: this.authService.currentUser?.uid,
-              author: this.authService.currentUser?.displayName
+              author: this.authService.currentUser?.displayName,
+              likedPeoples: []
             }
             this.addToFirestore(photoEntry)
           }
@@ -99,7 +100,7 @@ export class GalleryComponent {
       const first = this.authService.userData.first
       const second = this.authService.userData.second
       const third = this.authService.userData.third
-      this.authService.userData={
+      this.authService.userData = {
         first: priority == 1 ? first ? "" : id : first,
         second: priority == 2 ? second ? "" : id : second,
         third: priority == 3 ? third ? "" : id : third,
@@ -110,13 +111,41 @@ export class GalleryComponent {
 
   onVoted(priority: number, entry: PhotoEntryID) {
     var ref = this.firestore.doc('photoEntries/' + entry.id)
-    ref.update({
-      score: priority == 1 ? entry.score + 20 : priority == 2 ? entry.score + 10 : entry.score + 5,
-    })
+    if (this.authService.currentUser?.uid) {
+      this.useVote(priority, entry.id)
+      if (!entry.likedPeoples.includes(this.authService.currentUser.uid)) {
+        var likedUsers = entry.likedPeoples
+        likedUsers.push(this.authService.currentUser.uid)
+        ref.update({
+          score: priority == 1 ? entry.score + 20 : priority == 2 ? entry.score + 10 : entry.score + 5,
+          likedPeoples: likedUsers
+        })
+      }
+      else {
+        var likedUsers = entry.likedPeoples
+        likedUsers.splice(likedUsers.indexOf(this.authService.currentUser.uid))
+        ref.update({
+          score: priority == 1 ? entry.score - 20 : priority == 2 ? entry.score - 10 : entry.score - 5,
+          likedPeoples: likedUsers
+        })
+      }
+    }
   }
 
   onLike(entry: PhotoEntryID) {
-
+    if (this.authService.currentUser?.uid)
+      if (this.authService.userData?.first == entry.id)
+        this.onVoted(1, entry)
+      else if (this.authService.userData?.second == entry.id)
+        this.onVoted(2, entry)
+      else if (this.authService.userData?.third == entry.id)
+        this.onVoted(3, entry)
+      else if (this.authService.userData?.first == "")
+        this.onVoted(1, entry)
+      else if (this.authService.userData?.second == "")
+        this.onVoted(2, entry)
+      else if (this.authService.userData?.third == "")
+        this.onVoted(3, entry)
   }
 
   logout() {
