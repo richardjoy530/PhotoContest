@@ -26,24 +26,23 @@ export class AuthService {
   }
 
   syncUserVotes() {
-    var a = this.firestore.doc("users/" + this.currentUser?.uid).valueChanges()
-    a.subscribe({
-      next(x) { console.log('got value ' , x); },
-      error(err) { console.error('something wrong occurred: ' + err); },
-      complete() { console.log('done'); }
-    })
-
-    // this.firestore.doc("users/" + this.currentUser?.uid).valueChanges().subscribe((userd: any) => {
-    //   if (userd == undefined)
-    //     this.firestore.collection<UserData>('users').doc(this.currentUser?.uid).set({
-    //         first: "",
-    //         second: "",
-    //         third: ""
-    //     })
-    //   else
-    //     this.userData = userd
-    //   console.log(this.userData)
+    // var a = this.firestore.doc("users/" + this.currentUser?.uid).valueChanges()
+    // a.subscribe({
+    //   next(x) { console.log('got value ' , x); },
+    //   error(err) { console.error('something wrong occurred: ' + err); },
+    //   complete() { console.log('done'); }
     // })
+
+    this.firestore.doc("users/" + this.currentUser?.uid).valueChanges().subscribe((userd: any) => {
+      if (userd == undefined)
+        this.firestore.collection<UserData>('users').doc(this.currentUser?.uid).set({
+            first: "",
+            second: "",
+            third: ""
+        })
+      else
+        this.userData = userd
+    })
   }
 
   updateUserVotes(userVotes: UserData) {
