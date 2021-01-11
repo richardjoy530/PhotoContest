@@ -6,3 +6,5 @@ export interface PhotoEntry {
     author: string | undefined | null,
     uid: string | undefined | null
 }
+
+export interface PhotoEntryID extends PhotoEntry { id: string; }

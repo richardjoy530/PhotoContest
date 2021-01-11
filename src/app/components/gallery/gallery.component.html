@@ -17,7 +17,7 @@
 
 <div class="main-container">
     <div class="img-entry" *ngFor="let entry of photoEntries | async">
-        <img src={{entry.photoUrl}}>
+        <img src={{entry.photoUrl}} (click)="onLike(entry)">
     </div>
 </div>
 
