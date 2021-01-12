@@ -1,14 +1,29 @@
-<div class="main-container">
-  <section class="login-section">
-    <p>Please enter your credentials</p>
-    <div class="field" >
-      <input id="email" type="text" placeholder="Email" [(ngModel)]='email'>
-      <input id="password" type="password" placeholder="Password" [(ngModel)]='password'>
+<div class="container">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <form action="#" class="sign-in-form">
+        <h2 class="title">Welcome</h2>
+        <div class="input-field">
+          <i class="fas fa-user cls"></i>
+          <input [(ngModel)]="email" type="text" placeholder="Email" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock cls"></i>
+          <input [(ngModel)]="password" type="password" placeholder="Password" />
+        </div>
+        <input (click)="loginWithEmail()" type="submit" value="Login" class="btn solid" />
+        <p class="social-text">Or Sign in with</p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-microsoft"></i>
+          </a>
+          <a (click)="loginWithGoogle()" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+        </div>
+      </form>
     </div>
-    <input (click)="loginWithEmail()" class="submit" type="button" value="LOGIN">
-    <input (click)="loginWithGoogle()" class="submit" type="button" value="Log In with Google">
-  </section>
-  <section class="other-section">
-    <img src="assets\undraw_moments_0y20.svg" height="300px">
-  </section>
-</div>
+  </div>
