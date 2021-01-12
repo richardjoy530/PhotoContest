@@ -27,7 +27,7 @@
                     style='padding-right:8px'></i>
                 <i *ngIf="authService.userData?.third==entry.id" id={{entry.id}} class="fas fa-heart bronze"
                     style='padding-right:8px'></i>
-                <span *ngIf="authService.config.resultsPublished">
+                <span *ngIf="authService.config?.resultsPublished">
                     {{entry.score}}
                 </span>
             </span>
