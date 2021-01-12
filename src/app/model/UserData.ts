@@ -1,4 +1,3 @@
-
 export interface UserData {
   first: string 
   second: string 

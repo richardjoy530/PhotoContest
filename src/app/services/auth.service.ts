@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
+import { Observable } from 'rxjs';
+import { Configs } from '../model/Configs';
 import { UserData } from '../model/UserData';
 
 @Injectable({
@@ -12,6 +14,7 @@ export class AuthService {
 
   currentUser: firebase.User | undefined
   userData: UserData | undefined
+  config: Configs | undefined
 
   constructor(public auth: AngularFireAuth, private route: Router, private firestore: AngularFirestore) {
     this.auth.user.subscribe((user: any) => this.currentUser = user)
@@ -19,10 +22,20 @@ export class AuthService {
       if (user as firebase.User) {
         route.navigate(["gallery"])
         this.syncUserVotes()
+        this.syncConfigs()
       }
       else route.navigate(["login"])
     })
 
+  }
+
+  syncConfigs() {
+    this.firestore.doc("configs/values").valueChanges().subscribe((configs: any) => {
+      if (configs) {
+        this.config = configs
+        console.log(this.config)
+      }
+    })
   }
 
   syncUserVotes() {
@@ -36,9 +49,9 @@ export class AuthService {
     this.firestore.doc("users/" + this.currentUser?.uid).valueChanges().subscribe((userd: any) => {
       if (userd == undefined)
         this.firestore.collection<UserData>('users').doc(this.currentUser?.uid).set({
-            first: "",
-            second: "",
-            third: ""
+          first: "",
+          second: "",
+          third: ""
         })
       else
         this.userData = userd
