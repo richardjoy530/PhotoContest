@@ -38,7 +38,7 @@
 <div *ngIf='popUpVisible' class="upload-popup">
     <p class="heading">Upload your photo</p>
     <input class="input-file" type="file" (change)="onFileSelected($event)">
-    <input [(ngModel)]='caption' type="text" name="caption" placeholder="Caption" required>
+    <input [(ngModel)]='caption' type="text" name="caption" placeholder="Caption" autocomplete="off" required>
     <div *ngIf="!uploading" (click)="chooseFile()" class="upload-area">
         <p *ngIf="!imgSelected">Choose a file to<br>upload</p>
         <img id="preview" src="#" class="nano">
