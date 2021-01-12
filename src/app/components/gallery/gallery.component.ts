@@ -41,7 +41,6 @@ export class GalleryComponent {
 
   }
 
-
   onUpload() {
     this.popUpVisible = true
     this.uploading = false
@@ -107,6 +106,7 @@ export class GalleryComponent {
       }
       this.authService.updateUserVotes(this.authService.userData)
     }
+
   }
 
   onVoted(priority: number, entry: PhotoEntryID) {

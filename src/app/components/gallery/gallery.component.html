@@ -18,7 +18,20 @@
 <div class="main-container">
     <div class="img-entry" *ngFor="let entry of photoEntries | async">
         <img src={{entry.photoUrl}} (click)="onLike(entry)">
-        {{entry.score}}
+        <span class="img-bottom">
+            {{entry.caption}}
+            <span>
+                <i *ngIf="authService.userData?.first==entry.id" id={{entry.id}} class="fas fa-heart gold"
+                    style='padding-right:8px'></i>
+                <i *ngIf="authService.userData?.second==entry.id" id={{entry.id}} class="fas fa-heart silver"
+                    style='padding-right:8px'></i>
+                <i *ngIf="authService.userData?.third==entry.id" id={{entry.id}} class="fas fa-heart bronze"
+                    style='padding-right:8px'></i>
+                <span *ngIf="authService.config.resultsPublished">
+                    {{entry.score}}
+                </span>
+            </span>
+        </span>
     </div>
 </div>
 
