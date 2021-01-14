@@ -130,6 +130,9 @@ export class GalleryComponent {
         })
       }
     }
+    this.authService.userData?.first == "" ?
+      this.authService.userData?.second == "" ?
+        this.authService.userData?.third == "" ? 3 : 2 : 1 : 0
   }
 
   onLike(entry: PhotoEntryID) {
@@ -148,7 +151,18 @@ export class GalleryComponent {
         this.onVoted(3, entry)
   }
 
+  getRemainingVotes() {
+    var votes = this.authService.userData?.first == "" ? 1 : 0
+    votes += this.authService.userData?.second == "" ? 1 : 0
+    votes += this.authService.userData?.third == "" ? 1 : 0
+    return votes
+  }
+
   logout() {
     this.authService.logout()
+  }
+
+  isVoted(id: string) {
+    return this.authService.userData?.first == id || this.authService.userData?.second == id || this.authService.userData?.third == id ? true : false
   }
 }

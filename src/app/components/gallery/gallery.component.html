@@ -3,6 +3,7 @@
         Showcase
     </span>
     <span>
+        <a> {{getRemainingVotes()}} {{(getRemainingVotes()==2||getRemainingVotes()==3)?"Votes":"Vote"}} Left</a>
         <a (click)="onUpload()">Upload</a>
         <a (click)="logout()">Logout</a>
         <a>{{authService.currentUser?.displayName}}</a>
@@ -16,23 +17,43 @@
 </div>
 
 <div class="main-container">
-    <div class="img-entry" *ngFor="let entry of photoEntries | async">
-        <img src={{entry.photoUrl}} (click)="onLike(entry)">
+
+    <div class="each-entry" *ngFor="let entry of photoEntries | async">
+        <img src={{entry.photoUrl}}>
+        <div class="overlay">
+
+            <img *ngIf="authService.userData?.first==''&&!isVoted(entry.id)" src="assets\one-star.svg"
+                style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(1,entry)">
+            <img *ngIf="authService.userData?.second==''&&!isVoted(entry.id)" src="assets\two-stars.svg"
+                style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(2,entry)">
+            <img *ngIf="authService.userData?.third==''&&!isVoted(entry.id)" src="assets\three-stars.svg"
+                style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(3,entry)">
+
+
+            <span class="unvote" *ngIf="isVoted(entry.id)" (click)="onLike(entry)"><i class="fas fa-minus-circle"
+                    style="margin: 10px;"></i> Tap to remove your vote </span>
+
+            <span class="unvote" *ngIf="getRemainingVotes()==0&&!isVoted(entry.id)">No votes left</span>
+
+        </div>
         <span class="img-bottom">
             {{entry.caption}}
             <span>
-                <i *ngIf="authService.userData?.first==entry.id" id={{entry.id}} class="fas fa-heart gold"
+                <!-- <img *ngIf="authService.userData?.first==entry.id" src="assets\third.svg" style="margin: 10px;"> -->
+
+                <!-- <i *ngIf="authService.userData?.first==entry.id" class="fas fa-heart gold"
                     style='padding-right:8px'></i>
-                <i *ngIf="authService.userData?.second==entry.id" id={{entry.id}} class="fas fa-heart silver"
+                <i *ngIf="authService.userData?.second==entry.id" class="fas fa-heart silver"
                     style='padding-right:8px'></i>
-                <i *ngIf="authService.userData?.third==entry.id" id={{entry.id}} class="fas fa-heart bronze"
-                    style='padding-right:8px'></i>
+                <i *ngIf="authService.userData?.third==entry.id" class="fas fa-heart bronze"
+                    style='padding-right:8px'></i> -->
                 <span *ngIf="authService.config?.resultsPublished">
                     {{entry.score}}
                 </span>
             </span>
         </span>
     </div>
+
 </div>
 
 <div *ngIf='popUpVisible' class="upload-popup">
