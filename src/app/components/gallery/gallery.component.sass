@@ -1,14 +1,6 @@
 .nano
     height: 0px
     width: 0px
-.red
-    color: #ed4956
-.gold
-    color: gold
-.silver
-    color: silver
-.bronze
-    color: brown
 
 nav
     position: sticky
@@ -77,11 +69,11 @@ nav
         .img-bottom
             font-family: 'Poppins', sans-serif
             font-weight: 500
-            padding: 6px 0px
+            padding: 6px 10px
             display: flex
             width: 100%
             text-align: center
-            justify-content: center
+            justify-content: space-between
 
             span
                 font-family: 'Poppins', sans-serif
@@ -97,7 +89,6 @@ nav
             display: flex
             justify-content: center
             align-items: center
-            pa
 
             .unvote
                 display: flex
@@ -110,7 +101,45 @@ nav
                 font-family: 'Poppins', sans-serif
                 font-weight: 500
         
-    .each-entry:hover .overlay 
+        .overlay-expand
+            position: absolute
+            transition: .5s ease
+            width: 100%
+            height: 400px
+            opacity: 1
+
+        .expand-icon
+            position: absolute
+            right: 0px
+            margin: 10px
+            transition: .5s ease
+            opacity: 0
+            z-index: 50
+
+  
+        .overlay-top
+            position: absolute
+            background: linear-gradient(to bottom right, rgba(0,0,0,1) 0%, rgba(42,42,42,0) 25%, rgba(255,255,255,0) 100%)
+            transition: .5s ease
+            width: 100%
+            height: 400px
+            opacity: 1
+            display: flex
+            justify-content: space-between
+            align-items: flex-start
+
+            img
+                margin: 10px
+                width: 50px
+                height: 50px
+                z-index: 50
+            
+      
+        
+    .each-entry:hover .overlay
+        opacity: 1
+    
+    .each-entry:hover .expand-icon
         opacity: 1
         
 .upload-popup
@@ -181,3 +210,60 @@ nav
         width: 100%
         display: flex
         justify-content: space-around
+
+
+.expanded
+    position: fixed
+    display: flex
+    font-family: 'Poppins', sans-serif
+    align-items: center
+    justify-content: space-evenly
+    width: 90%
+    color: #5f6368
+    height: 90%
+    z-index: 150
+    padding: 20px
+    opacity: 1
+    top: 50%
+    transition: 1.8s ease-in-out
+    left: 50%
+    transform: translate(-50%,-50%)
+    background-color: #fffffffe
+    border-radius: 20px
+    box-shadow: 4px 4px 50px 18px rgba(199,199,199,0.92)
+
+    img
+        max-width: 80%
+        max-height: 90%
+        border-radius: 10px
+
+    .done
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+
+    
+    .btn
+        font-family: 'Poppins', sans-serif
+        color: #ffffff
+        background-color: #5f6368
+        padding: 8px 20px
+        margin: 20px
+        border-radius: 8px
+        cursor: pointer
+    .cancel
+        background-color: #eeede8
+        color: #5f6368
+
+    span
+        img
+            padding: 4px
+    
+    p
+        font-weight: 500
+        text-align: center
+
+.selected-vote
+    border: solid
+    padding: 4px
+    border-color:  #5f6368
