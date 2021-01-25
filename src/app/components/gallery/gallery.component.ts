@@ -16,11 +16,13 @@ export class GalleryComponent {
 
   popUpVisible = false
   uploading = false
+  expanded = false
   imgSelected = false
   file: any
   uploadPercent: any
   downloadURL: any
   caption: string | undefined
+  selectedImage!: PhotoEntryID;
 
   photoEntryConnection: AngularFirestoreCollection<PhotoEntry>;
   photoEntries: Observable<PhotoEntryID[]>
@@ -133,6 +135,9 @@ export class GalleryComponent {
     this.authService.userData?.first == "" ?
       this.authService.userData?.second == "" ?
         this.authService.userData?.third == "" ? 3 : 2 : 1 : 0
+
+    if (this.expanded)
+      this.expandImage(entry)
   }
 
   onLike(entry: PhotoEntryID) {
@@ -165,4 +170,23 @@ export class GalleryComponent {
   isVoted(id: string) {
     return this.authService.userData?.first == id || this.authService.userData?.second == id || this.authService.userData?.third == id ? true : false
   }
+
+  expandImage(entry: PhotoEntryID) {
+    // var first = document.getElementById('first')
+    // var second = document.getElementById('second')
+    // var third = document.getElementById('third')
+    this.selectedImage = entry
+    this.expanded = true
+    // if (this.authService.userData?.first == entry.id)
+    //   first?.classList.add('selected-vote')
+    // else if (this.authService.userData?.second == entry.id)
+    //   second?.classList.add('selected-vote')
+    // else if (this.authService.userData?.third == entry.id)
+    //   third?.classList.add('selected-vote')
+}
+
+download(){
+  window.open(this.selectedImage.photoUrl)
+}
+
 }

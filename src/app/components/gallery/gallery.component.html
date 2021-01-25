@@ -12,7 +12,7 @@
 </nav>
 
 <div class="theme">
-    Nature
+    {{authService.config?.theme}}
     <p>6th Jan 2021</p>
 </div>
 
@@ -20,13 +20,26 @@
 
     <div class="each-entry" *ngFor="let entry of photoEntries | async">
         <img src={{entry.photoUrl}}>
-        <div class="overlay">
-
-            <img *ngIf="authService.userData?.first==''&&!isVoted(entry.id)" src="assets\one-star.svg"
+        
+        <div *ngIf="isVoted(entry.id)" class="overlay-top">
+            <img *ngIf="authService.userData?.first==entry.id" src="assets\medal1.svg">
+            <img *ngIf="authService.userData?.second==entry.id" src="assets\medal2.svg">
+            <img *ngIf="authService.userData?.third==entry.id" src="assets\medal3.svg">
+            
+        </div>
+        <div class="overlay-expand">
+            <img (click)="expandImage(entry)" class="expand-icon" src="assets\expand.svg"
+            style="height: 30px; width: 30px;">
+        </div>
+        <div id="overlay" class="overlay">
+            
+            
+            
+            <img *ngIf="authService.userData?.first==''&&!isVoted(entry.id)" src="assets\medal1.svg"
                 style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(1,entry)">
-            <img *ngIf="authService.userData?.second==''&&!isVoted(entry.id)" src="assets\two-stars.svg"
+            <img *ngIf="authService.userData?.second==''&&!isVoted(entry.id)" src="assets\medal2.svg"
                 style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(2,entry)">
-            <img *ngIf="authService.userData?.third==''&&!isVoted(entry.id)" src="assets\three-stars.svg"
+            <img *ngIf="authService.userData?.third==''&&!isVoted(entry.id)" src="assets\medal3.svg"
                 style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(3,entry)">
 
 
@@ -65,10 +78,30 @@
         <img id="preview" src="#" class="nano">
     </div>
     <div *ngIf="uploading" (click)="chooseFile()" class="upload-area">
-        <p>{{ uploadPercent | async }}%<br>uploaded</p>
+        <p>Uploading...</p>
     </div>
     <span class="done">
         <button (click)="uploadToFireStorage()" class="btn">Upload</button>
         <button (click)="popUpVisible=false" class="btn cancel">Cancel</button>
     </span>
+</div>
+
+<div *ngIf="expanded" class="expanded">
+
+    <img src={{selectedImage.photoUrl}}
+        alt="">
+    <span class="done">
+        <!-- <p>Pick your vote:</p> -->
+        <!-- <span>
+            <img id="first" (click)="onVoted(1,selectedImage)" src="assets\medal1.svg"
+                style="margin: 10px; width: 50px; height: 50px">
+            <img id="second" (click)="onVoted(2,selectedImage)" src="assets\medal2.svg"
+                style="margin: 10px; width: 50px; height: 50px">
+            <img id="third" (click)="onVoted(3,selectedImage)" src="assets\medal3.svg"
+                style="margin: 10px; width: 50px; height: 50px">
+        </span> -->
+        <button (click)="download()" class="btn">Download</button>
+        <button (click)="expanded=false" class="btn cancel">Cancel</button>
+    </span>
+
 </div>
