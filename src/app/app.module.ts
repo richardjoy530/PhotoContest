@@ -11,7 +11,7 @@ import { route } from './Routes'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [RootComponent]
 })
 export class AppModule { }
