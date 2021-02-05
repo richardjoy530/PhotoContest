@@ -62,33 +62,34 @@ export class GalleryComponent {
   }
 
   uploadToFireStorage() {
-    if (!this.caption) this.caption = ""
-    this.uploading = true
-    var filePath = `/entries/${new Date().getTime()}`
-    const task = this.storage.upload(filePath, this.file)
-    const fileRef = this.storage.ref(filePath)
-    this.uploadPercent = task.percentageChanges()
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url: any) => {
-          if (url) {
-            this.downloadURL = url
-            var photoEntry: PhotoEntry
-            photoEntry = {
-              caption: this.caption,
-              photoUrl: this.downloadURL,
-              score: 0,
-              timeUploaded: Date.now(),
-              uid: this.authService.currentUser?.uid,
-              author: this.authService.currentUser?.displayName,
-              likedPeoples: []
+    if (this.caption && this.imgSelected) {
+      this.uploading = true
+      var filePath = `/entries/${new Date().getTime()}`
+      const task = this.storage.upload(filePath, this.file)
+      const fileRef = this.storage.ref(filePath)
+      this.uploadPercent = task.percentageChanges()
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url: any) => {
+            if (url) {
+              this.downloadURL = url
+              var photoEntry: PhotoEntry
+              photoEntry = {
+                caption: this.caption,
+                photoUrl: this.downloadURL,
+                score: 0,
+                timeUploaded: Date.now(),
+                uid: this.authService.currentUser?.uid,
+                author: this.authService.currentUser?.displayName,
+                likedPeoples: []
+              }
+              this.addToFirestore(photoEntry)
             }
-            this.addToFirestore(photoEntry)
-          }
+          })
+          this.popUpVisible = false
         })
-        this.popUpVisible = false
-      })
-    ).subscribe()
+      ).subscribe()
+    }
   }
 
   addToFirestore(entry: PhotoEntry) {
@@ -183,10 +184,10 @@ export class GalleryComponent {
     //   second?.classList.add('selected-vote')
     // else if (this.authService.userData?.third == entry.id)
     //   third?.classList.add('selected-vote')
-}
+  }
 
-download(){
-  window.open(this.selectedImage.photoUrl)
-}
+  download() {
+    window.open(this.selectedImage.photoUrl)
+  }
 
 }
