@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AuthGuard } from './services/auth.guard';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/c
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
   ],
-  providers: [AuthService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [AuthGuard,AuthService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

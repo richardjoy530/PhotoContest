@@ -1,5 +1,6 @@
 import { GalleryComponent } from "./components/gallery/gallery.component";
 import { LoginComponent } from "./components/login/login.component";
+import { AuthGuard } from "./services/auth.guard";
 
 export const route = [{
   path: "",
@@ -12,6 +13,7 @@ export const route = [{
 },
 {
   path: "gallery",
+  canActivate: [AuthGuard],
   component: GalleryComponent,
 }, {
   path: "**",
