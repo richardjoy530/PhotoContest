@@ -21,10 +21,14 @@ export class AuthService {
     this.auth.authState.subscribe((user: any) => {
       if (user as firebase.User) {
         route.navigate(["gallery"])
+        console.log("to gallery")
         this.syncUserVotes()
         this.syncConfigs()
       }
-      else route.navigate(["login"])
+      else {
+        route.navigate(["login"])
+        console.log("to login")
+      }
     })
 
   }
