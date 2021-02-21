@@ -4,6 +4,7 @@
     </span>
     <span>
         <a> {{getRemainingVotes()}} {{(getRemainingVotes()==2||getRemainingVotes()==3)?"Votes":"Vote"}} Left</a>
+        <a (click)="resultsVisible=true">Results</a>
         <a (click)="onUpload()">Upload</a>
         <a (click)="logout()">Logout</a>
         <a>{{authService.currentUser?.displayName}}</a>
@@ -103,5 +104,34 @@
         <button (click)="download()" class="btn">Download</button>
         <button (click)="expanded=false" class="btn cancel">Cancel</button>
     </span>
+
+</div>
+
+
+<div *ngIf="resultsVisible" class="results">
+
+    <div>
+        <img class="svg" src="assets\medal1.svg">
+        <img src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1611570801681?alt=media&token=a5d5b72b-07df-4ab9-8fb5-e1af4956958a">
+        <p>The only way to see the sunset, is to ride into it.</p>
+        <p>- Kenneth Godwin</p>
+    </div>
+
+    <div>
+        <img class="svg" src="assets\medal2.svg">
+        <img src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1611929220775?alt=media&token=c7089b24-673c-4698-8481-6da0fb574b40">
+        <p>Chasing sunrise through snow-capped mountains and bikes.</p>
+        <p>- Akshay Kumar</p>
+    </div>
+
+    <div>
+        <img class="svg" src="assets\medal3.svg">
+        <img src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1612524306229?alt=media&token=84746ef6-bf10-4f00-8983-3d575d3153e5">
+        <p>Seaways</p>
+        <p>- Naveen MM</p>
+    </div>
+
+    <button (click)="resultsVisible=false" class="btn cancel">Cancel</button>
+
 
 </div>

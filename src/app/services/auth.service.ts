@@ -19,11 +19,13 @@ export class AuthService {
   constructor(public auth: AngularFireAuth, private route: Router, private firestore: AngularFirestore) {
     this.auth.user.subscribe((user: any) => this.currentUser = user)
     this.auth.authState.subscribe((user: any) => {
+      this.syncConfigs()
       if (user as firebase.User) {
+        this.syncConfigs()
         route.navigate(["gallery"])
         console.log("to gallery")
-        this.syncUserVotes()
         this.syncConfigs()
+
       }
       else {
         route.navigate(["login"])
@@ -38,6 +40,7 @@ export class AuthService {
       if (configs) {
         this.config = configs
         console.log(this.config)
+        this.syncUserVotes()
       }
     })
   }
@@ -50,9 +53,9 @@ export class AuthService {
     //   complete() { console.log('done'); }
     // })
 
-    this.firestore.doc("users/" + this.currentUser?.uid).valueChanges().subscribe((userd: any) => {
-      if (userd == undefined)
-        this.firestore.collection<UserData>('users').doc(this.currentUser?.uid).set({
+    this.firestore.doc(this.config?.theme + "_users/" + this.currentUser?.uid).valueChanges().subscribe((userd: any) => {
+      if (userd == undefined && this.config?.theme)
+        this.firestore.collection<UserData>(this.config?.theme + "_users").doc(this.currentUser?.uid).set({
           first: "",
           second: "",
           third: ""
@@ -63,7 +66,8 @@ export class AuthService {
   }
 
   updateUserVotes(userVotes: UserData) {
-    this.firestore.collection<UserData>('users').doc(this.currentUser?.uid).update(userVotes)
+    if (this.config?.theme)
+      this.firestore.collection<UserData>(this.config?.theme + "_users").doc(this.currentUser?.uid).update(userVotes)
   }
 
   loginWithGoogle() {
