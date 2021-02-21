@@ -15,6 +15,7 @@ export class GalleryComponent {
 
 
   popUpVisible = false
+  resultsVisible = false
   uploading = false
   expanded = false
   imgSelected = false
@@ -30,7 +31,13 @@ export class GalleryComponent {
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage, public authService: AuthService) {
     document.body.classList.remove("bg")
-    this.photoEntryConnection = firestore.collection<PhotoEntry>('photoEntries')
+    var theme = "The Sun"
+    console.log(this.authService.config?.theme)
+    if (this.authService.config) {
+      console.log(this.authService)
+      theme = this.authService.config.theme
+    }
+    this.photoEntryConnection = firestore.collection<PhotoEntry>(theme)
     this.photoEntries = this.photoEntryConnection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -113,7 +120,7 @@ export class GalleryComponent {
   }
 
   onVoted(priority: number, entry: PhotoEntryID) {
-    var ref = this.firestore.doc('photoEntries/' + entry.id)
+    var ref = this.firestore.doc(this.authService.config?.theme + '/' + entry.id)
     if (this.authService.currentUser?.uid) {
       this.useVote(priority, entry.id)
       if (!entry.likedPeoples.includes(this.authService.currentUser.uid)) {
