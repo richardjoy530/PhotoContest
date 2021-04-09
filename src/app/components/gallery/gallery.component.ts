@@ -31,7 +31,7 @@ export class GalleryComponent {
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage, public authService: AuthService) {
     document.body.classList.remove("bg")
-    var theme = "Tree"
+    var theme = "Trees" // quick fix
     console.log(this.authService.config?.theme)
     if (this.authService.config) {
       console.log(this.authService)
