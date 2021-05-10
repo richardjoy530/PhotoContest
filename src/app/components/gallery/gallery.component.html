@@ -21,21 +21,21 @@
 
     <div class="each-entry" *ngFor="let entry of photoEntries | async">
         <img src={{entry.photoUrl}}>
-        
+
         <div *ngIf="isVoted(entry.id)" class="overlay-top">
             <img *ngIf="authService.userData?.first==entry.id" src="assets\medal1.svg">
             <img *ngIf="authService.userData?.second==entry.id" src="assets\medal2.svg">
             <img *ngIf="authService.userData?.third==entry.id" src="assets\medal3.svg">
-            
+
         </div>
         <div class="overlay-expand">
             <img (click)="expandImage(entry)" class="expand-icon" src="assets\expand.svg"
-            style="height: 30px; width: 30px;">
+                style="height: 30px; width: 30px;">
         </div>
         <div id="overlay" class="overlay">
-            
-            
-            
+
+
+
             <img *ngIf="authService.userData?.first==''&&!isVoted(entry.id)" src="assets\medal1.svg"
                 style="margin: 10px; width: 50px; height: 50px" (click)="onVoted(1,entry)">
             <img *ngIf="authService.userData?.second==''&&!isVoted(entry.id)" src="assets\medal2.svg"
@@ -89,8 +89,7 @@
 
 <div *ngIf="expanded" class="expanded">
 
-    <img src={{selectedImage.photoUrl}}
-        alt="">
+    <img src={{selectedImage.photoUrl}} alt="">
     <span class="done">
         <!-- <p>Pick your vote:</p> -->
         <!-- <span>
@@ -113,25 +112,28 @@
     <div>
         <img class="svg" src="assets\medal1.svg">
 
-        <img src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1618554716468?alt=media&token=dee01191-eefd-4b58-8333-1b407b992dce">
-        <p>There is a right time for everything and everyone.</p>
+        <img
+            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1618916928489?alt=media&token=c0a01ad4-36c7-49de-ba4b-321bf910d4ab">
+        <p>Reaching the heavens</p>
         <p>- Richard Joy</p>
     </div>
 
     <div>
         <img class="svg" src="assets\medal2.svg">
 
-        <img src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1618556283689?alt=media&token=4450c280-bd5d-4c49-b542-8375d31304aa">
-        <p>The secret to success is written on the doors of Auditorium.</p>
-        <p>- Kajal Gupta</p>
+        <img
+            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1619639287709?alt=media&token=fa44b83c-7831-4121-b1c2-92e7bbc55ea5">
+        <p>Symmetrical Architecture</p>
+        <p>- Kamal S</p>
     </div>
 
     <div>
         <img class="svg" src="assets\medal3.svg">
 
-        <img src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1618555367864?alt=media&token=fe1eabbc-b10f-4b08-881c-b644cbc5a352">
-        <p>Head once ruled rolls in the ground!</p>
-        <p>- Lijo Joseph</p>
+        <img
+            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1619150545679?alt=media&token=91591262-defe-41ff-ae15-e6fec29264e0">
+        <p>Everything is designed. Few things are designed well.</p>
+        <p>- Kajal Gupta</p>
     </div>
 
     <button (click)="resultsVisible=false" class="btn cancel">Cancel</button>
