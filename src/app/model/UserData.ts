@@ -1,5 +1,5 @@
 export interface UserData {
-  first: string 
-  second: string 
-  third: string
+  first: string;
+  second: string;
+  third: string;
 }
