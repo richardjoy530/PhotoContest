@@ -5,7 +5,7 @@
   },
   "hosting": [
     {
-      "site": "photocontestkochi",
+      "site": "devphotocontestkochi",
       "public": "public",
       "ignore": [
         "firebase.json",
