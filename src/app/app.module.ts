@@ -9,7 +9,7 @@ import { AuthService } from './services/auth.service';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { route } from './Routes';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AuthGuard } from './services/auth.guard';
