@@ -4,7 +4,7 @@
     </span>
     <span>
         <a> {{getRemainingVotes()}} {{(getRemainingVotes()==2||getRemainingVotes()==3)?"Votes":"Vote"}} Left</a>
-        <a (click)="resultsVisible=true">Results</a>
+        <a (click)="resultsVisible=false">Results</a>
         <a (click)="onUpload()">Upload</a>
         <a (click)="logout()">Logout</a>
         <a>{{authService.currentUser?.displayName}}</a>
@@ -109,7 +109,7 @@
 
 <div *ngIf="resultsVisible" class="results">
 <!-- Need to automate this one day! -->
-    <div>
+    <!-- <div>
         <img class="svg" src="assets\medal1.svg">
 
         <img
@@ -134,7 +134,7 @@
             src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1638443566366?alt=media&token=e0d7263b-5e4f-4ed7-8bf8-e13a931cd09a">
         <p>'tis the season</p>
         <p>Kurien Eapen</p>
-    </div>
+    </div> -->
 
     <button (click)="resultsVisible=false" class="btn cancel">Cancel</button>
 
