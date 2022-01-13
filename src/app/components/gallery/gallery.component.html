@@ -4,7 +4,7 @@
     </span>
     <span>
         <a> {{getRemainingVotes()}} {{(getRemainingVotes()==2||getRemainingVotes()==3)?"Votes":"Vote"}} Left</a>
-        <a (click)="resultsVisible=false">Results</a>
+        <a (click)="resultsVisible=true">Results</a>
         <a (click)="onUpload()">Upload</a>
         <a (click)="logout()">Logout</a>
         <a>{{authService.currentUser?.displayName}}</a>
@@ -109,32 +109,32 @@
 
 <div *ngIf="resultsVisible" class="results">
 <!-- Need to automate this one day! -->
-    <!-- <div>
+    <div>
         <img class="svg" src="assets\medal1.svg">
 
         <img
-            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1638466515964?alt=media&token=4c3ef3a1-1fa8-439a-a153-a200cac3d576">
-        <p>Christmas is in the air</p>
-        <p>Jobel Johny</p>
+            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1641536260372?alt=media&token=bae69a00-972d-4a2f-8d22-8da88f99d9b3">
+        <p>Most wonderful time of year: Christmas</p>
+        <p>Kajal Gupta</p>
     </div>
 
     <div>
         <img class="svg" src="assets\medal2.svg">
 
         <img
-            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1638413692605?alt=media&token=7e33baa0-7840-491b-bc9f-753146e5135b">
-        <p>The season of stars</p>
-        <p>Richard Joy</p>
+            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1641537111769?alt=media&token=42931eb3-12e0-4697-bac5-f6121e28fe8d">
+        <p>Gifts!</p>
+        <p>Isham Mohamed</p>
     </div>
 
     <div>
         <img class="svg" src="assets\medal3.svg">
 
         <img
-            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1638443566366?alt=media&token=e0d7263b-5e4f-4ed7-8bf8-e13a931cd09a">
-        <p>'tis the season</p>
-        <p>Kurien Eapen</p>
-    </div> -->
+            src="https://firebasestorage.googleapis.com/v0/b/photocontest-7d8c2.appspot.com/o/entries%2F1641542687250?alt=media&token=8507ef1a-cdbd-4607-9495-e33019403984">
+        <p>Lazy for a caption</p>
+        <p>Richard Joy</p>
+    </div>
 
     <button (click)="resultsVisible=false" class="btn cancel">Cancel</button>
 
